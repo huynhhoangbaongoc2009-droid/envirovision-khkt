@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảo Tàng Số EnviroVision - Triển Lãm & AI Phân Loại Rác Thải</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mint: {
+                            50: '#F4F8F5',
+                            100: '#E8F5E9',
+                            200: '#D8E9A8',
+                            500: '#8EAC50',
+                            600: '#4E9F3D',
+                            700: '#1E5128',
+                            800: '#0E2912',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#F4F8F5] text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-mint-200/60 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-mint-600 to-mint-700 flex items-center justify-center text-white shadow-md shadow-mint-600/20">
+                        <i data-lucide="leaf" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl text-mint-800 tracking-tight block">EnviroVision</span>
+                        <span class="text-[10px] text-mint-600 font-medium tracking-widest uppercase block -mt-1">Bảo Tàng Số KHKT 2025-2026</span>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-1 bg-mint-100/80 p-1.5 rounded-full border border-mint-200">
+                    <button onclick="switchTab('overview')" id="nav-overview" class="nav-btn px-5 py-2 rounded-full text-xs font-semibold text-mint-700 transition-all hover:bg-white/60">Tổng quan đề tài</button>
+                    <button onclick="switchTab('explore')" id="nav-explore" class="nav-btn px-5 py-2 rounded-full text-xs font-semibold text-mint-700 transition-all hover:bg-white/60">Khám phá đề tài</button>
+                    <button onclick="switchTab('library')" id="nav-library" class="nav-btn px-5 py-2 rounded-full text-xs font-semibold text-mint-700 transition-all hover:bg-white/60">Thư viện 22 loại rác</button>
+                    <button onclick="switchTab('ai-scanner')" id="nav-ai-scanner" class="nav-btn px-5 py-2 rounded-full text-xs font-semibold text-mint-700 transition-all hover:bg-white/60">Máy quét AI</button>
+                    <button onclick="switchTab('map')" id="nav-map" class="nav-btn px-5 py-2 rounded-full text-xs font-semibold text-mint-700 transition-all hover:bg-white/60">Bản đồ thực địa</button>
+                </nav>
+
+                <button onclick="switchTab('admin')" id="nav-admin" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-mint-600 hover:bg-mint-700 text-white text-xs font-semibold transition-all shadow-md shadow-mint-600/20">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>Trang quản trị</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        <section id="tab-overview" class="tab-content block space-y-8">
+            <div class="relative rounded-3xl bg-gradient-to-r from-mint-800 via-mint-700 to-mint-600 text-white p-8 md:p-12 overflow-hidden shadow-xl">
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-mint-200 text-xs font-medium border border-white/20">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        <span>Dự án Khoa Học Kỹ Thuật Cấp Tỉnh 2025-2026</span>
+                    </div>
+                    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight">Ứng Dụng AI Vào Phân Loại Rác Thải & Bảo Tàng Số Hóa EnviroVision</h1>
+                    <p class="text-mint-100 text-sm md:text-base leading-relaxed">
+                        Giải pháp ứng dụng mô hình trí tuệ nhân tạo EfficientNetV2-B0 kết hợp nền tảng bảo tàng số tương tác nhằm nâng cao nhận thức cộng đồng và tự động hóa quy trình phân loại rác tại nguồn.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <button onclick="switchTab('explore')" class="px-6 py-3 rounded-2xl bg-white text-mint-800 text-xs font-bold hover:bg-mint-100 transition-all shadow-lg flex items-center gap-2">
+                            <span>Khám phá đề tài ngay</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="switchTab('ai-scanner')" class="px-6 py-3 rounded-2xl bg-mint-700/80 hover:bg-mint-700 text-white border border-white/20 text-xs font-bold transition-all flex items-center gap-2">
+                            <i data-lucide="scan" class="w-4 h-4"></i>
+                            <span>Thử máy quét AI</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white p-6 rounded-2xl border border-mint-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
+                        <i data-lucide="target" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-mint-800">94.88%</div>
+                        <div class="text-xs text-slate-500 font-medium">Độ chính xác kiểm thử</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-mint-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-mint-800">0.11 Giây</div>
+                        <div class="text-xs text-slate-500 font-medium">Thời gian suy luận / Ảnh</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-mint-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
+                        <i data-lucide="layers" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-mint-800">22 Phân Loại</div>
+                        <div class="text-xs text-slate-500 font-medium">Nhóm rác thải sinh hoạt</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-mint-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
+                        <i data-lucide="database" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-mint-800">192.000+</div>
+                        <div class="text-xs text-slate-500 font-medium">Mẫu dữ liệu huấn luyện</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-explore" class="tab-content hidden space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-mint-600">Nghiên Cứu Khoa Học</span>
+                <h2 class="font-serif text-3xl font-bold text-mint-800">Chi Tiết Báo Cáo & Phương Pháp Nghiên Cứu</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-mint-100 shadow-sm space-y-4">
+                    <h3 class="font-serif font-bold text-lg text-mint-700">1. Thực Trạng & Tính Cấp Thiết</h3>
+                    <ul class="text-xs text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
+                        <li>Tỷ lệ tái chế chất thải sinh hoạt tại Việt Nam hiện chỉ đạt khoảng **10%** (VnEconomy, 2025).</li>
+                        <li>Rác thải lẫn lộn gây khó khăn cho thu gom và xử lý.</li>
+                        <li>Giải pháp **EnviroVision** ra đời ứng dụng AI tự động hóa phân loại rác tại nguồn.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-mint-100 shadow-sm space-y-4">
+                    <h3 class="font-serif font-bold text-lg text-mint-700">2. Mô Hình AI EfficientNetV2-B0</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Mô hình được huấn luyện trên 192.000+ hình ảnh, đạt độ chính xác **94.88%** với tốc độ nhận diện chỉ **0.11s/ảnh**.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-library" class="tab-content hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="font-serif text-2xl font-bold text-mint-800">Thư Viện Số Hóa 22 Loại Rác Thải</h2>
+            </div>
+            <div id="trash-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </section>
+
+        <section id="tab-ai-scanner" class="tab-content hidden space-y-6">
+            <div class="max-w-xl mx-auto bg-white p-6 rounded-3xl border border-mint-100 shadow-lg space-y-6 text-center">
+                <h2 class="font-serif text-2xl font-bold text-mint-800">Máy Quét Phân Loại Rác AI</h2>
+                <div class="border-2 border-dashed border-mint-200 rounded-2xl p-8 bg-mint-50/30">
+                    <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                    <button onclick="document.getElementById('image-input').click()" class="px-5 py-2.5 rounded-xl bg-mint-600 text-white text-xs font-semibold shadow-md">
+                        Tải ảnh rác thải lên
+                    </button>
+                </div>
+                <div id="scan-result" class="hidden p-4 rounded-2xl bg-mint-50 text-left space-y-2">
+                    <img id="preview-img" class="w-20 h-20 object-cover rounded-xl border border-mint-200" src="" alt="Preview">
+                    <h4 id="result-label" class="font-serif text-lg font-bold text-mint-800">Chai nhựa PET</h4>
+                    <p class="text-xs text-slate-600">Hướng dẫn: Cho vào thùng rác TÁI CHẾ.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-map" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-sm text-center">
+                <h2 class="font-serif text-2xl font-bold text-mint-800 mb-4">Bản Đồ Điểm Thu Gom Rác Nguy Hại</h2>
+                <div class="w-full h-64 bg-mint-100 rounded-2xl flex items-center justify-center text-mint-700 font-bold text-xs">
+                    [Tích hợp bản đồ vị trí điểm thu gom pin & rác điện tử]
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-admin" class="tab-content hidden space-y-6">
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-lg space-y-4">
+                <h2 class="font-serif text-2xl font-bold text-mint-800">Trang Quản Trị Hệ Thống</h2>
+                <input type="text" placeholder="Nhập tên nhãn rác mới..." class="w-full px-4 py-2 rounded-xl border border-mint-200 text-xs">
+                <button class="w-full py-2.5 rounded-xl bg-mint-600 text-white font-bold text-xs">Lưu Thay Đổi</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-mint-800 text-white py-6 text-center text-xs">
+        © 2025-2026 Bảo Tàng Số EnviroVision - Dự Án KHKT Cấp Tỉnh.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const trashData = [
+            { name: "Chai nhựa PET", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Nhựa HDPE (Can/Hộp)", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Nhựa LDPE (Túi nilon)", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Bìa Carton", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Giấy báo/Văn phòng", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Lon nhôm / Kim loại", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Chai thủy tinh", guide: "Bỏ thùng TÁI CHẾ" },
+            { name: "Pin thải", guide: "RÁC NGUY HẠI - Gom riêng" },
+            { name: "Bàn phím/Chuột cũ", guide: "RÁC ĐIỆN TỬ - Gom riêng" },
+            { name: "Thức ăn thừa", guide: "RÁC HỮU CƠ" }
+        ];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        function renderTrash() {
+            document.getElementById('trash-grid').innerHTML = trashData.map(item => `
+                <div class="bg-white p-4 rounded-2xl border border-mint-100 shadow-sm space-y-2">
+                    <h4 class="font-serif font-bold text-mint-800 text-sm">${item.name}</h4>
+                    <p class="text-xs text-slate-500">${item.guide}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('preview-img').src = event.target.result;
+                    document.getElementById('scan-result').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.onload = function() {
+            renderTrash();
+        }
+    </script>
+</body>
+</html>
