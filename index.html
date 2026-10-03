@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảo Tàng Số EnviroVision - Triển Lãm & AI Phân Loại Rác Thải</title>
+    <title>Bảo Tàng Số EnviroVision - KHKT Vĩnh Long 2025-2026</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,487 +50,476 @@
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-mint-200/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-22 py-3">
-                <!-- Logo -->
                 <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('overview')">
                     <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint-600 to-mint-700 flex items-center justify-center text-white shadow-lg shadow-mint-600/30">
                         <i data-lucide="leaf" class="w-7 h-7"></i>
                     </div>
                     <div>
                         <span class="font-serif font-bold text-2xl text-mint-800 tracking-tight block">EnviroVision</span>
-                        <span class="text-xs text-mint-600 font-bold tracking-widest uppercase block -mt-1">Bảo Tàng Số KHKT 2025-2026</span>
+                        <span class="text-xs text-mint-600 font-bold tracking-widest uppercase block -mt-1">Bảo Tàng Số KHKT Vĩnh Long</span>
                     </div>
                 </div>
 
-                <!-- Navigation Bar Style Bảo Tàng Số -->
-                <nav class="hidden lg:flex items-center gap-1.5 bg-mint-100/90 p-2 rounded-full border border-mint-200">
-                    <button onclick="switchTab('overview')" id="nav-overview" class="nav-btn px-5 py-2.5 rounded-full text-sm font-bold text-mint-700 transition-all hover:bg-white">Tổng quan</button>
-                    <button onclick="switchTab('explore')" id="nav-explore" class="nav-btn px-5 py-2.5 rounded-full text-sm font-bold text-mint-700 transition-all hover:bg-white">Khám phá đề tài</button>
-                    <button onclick="switchTab('library')" id="nav-library" class="nav-btn px-5 py-2.5 rounded-full text-sm font-bold text-mint-700 transition-all hover:bg-white">Thư viện 22 loại rác</button>
-                    <button onclick="switchTab('ai-scanner')" id="nav-ai-scanner" class="nav-btn px-5 py-2.5 rounded-full text-sm font-bold text-mint-700 transition-all hover:bg-white">Máy quét AI</button>
-                    <button onclick="switchTab('co2-calc')" id="nav-co2-calc" class="nav-btn px-5 py-2.5 rounded-full text-sm font-bold text-mint-700 transition-all hover:bg-white">Phân tích CO2</button>
-                    <button onclick="switchTab('map')" id="nav-map" class="nav-btn px-5 py-2.5 rounded-full text-sm font-bold text-mint-700 transition-all hover:bg-white">Bản đồ thực địa</button>
+                <nav class="hidden lg:flex items-center gap-1 bg-mint-100/90 p-1.5 rounded-full border border-mint-200">
+                    <button onclick="switchTab('overview')" id="nav-overview" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Tổng quan</button>
+                    <button onclick="switchTab('explore')" id="nav-explore" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Báo cáo KHKT</button>
+                    <button onclick="switchTab('co2-map3d')" id="nav-co2-map3d" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Bản đồ 3D CO2 Vĩnh Long</button>
+                    <button onclick="switchTab('co2-trend')" id="nav-co2-trend" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Chuyển dịch CO2</button>
+                    <button onclick="switchTab('eco-game')" id="nav-eco-game" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Game Trẻ Em</button>
+                    <button onclick="switchTab('library')" id="nav-library" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Thư viện 3D</button>
+                    <button onclick="switchTab('ai-scanner')" id="nav-ai-scanner" class="nav-btn px-4 py-2 rounded-full text-xs font-bold text-mint-700 transition-all hover:bg-white">Quét AI</button>
                 </nav>
 
-                <!-- Admin Button -->
-                <button onclick="switchTab('admin')" id="nav-admin" class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-mint-600 hover:bg-mint-700 text-white text-sm font-bold transition-all shadow-md shadow-mint-600/20">
-                    <i data-lucide="shield-check" class="w-5 h-5"></i>
-                    <span>Trang quản trị</span>
+                <button onclick="switchTab('admin')" id="nav-admin" class="flex items-center gap-2 px-4 py-2 rounded-2xl bg-mint-600 hover:bg-mint-700 text-white text-xs font-bold transition-all shadow-md">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>Quản trị</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
         <!-- TAB 1: TỔNG QUAN ĐỀ TÀI -->
         <section id="tab-overview" class="tab-content block space-y-8 animate-fadeIn">
-            <!-- Hero Banner -->
             <div class="relative rounded-3xl bg-gradient-to-r from-mint-800 via-mint-700 to-mint-600 text-white p-8 md:p-14 overflow-hidden shadow-2xl">
                 <div class="relative z-10 max-w-3xl space-y-5">
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-mint-100 text-xs font-bold border border-white/20 uppercase tracking-wider">
                         <i data-lucide="award" class="w-4 h-4"></i>
-                        <span>Dự án Khoa Học Kỹ Thuật Cấp Tỉnh 2025-2026</span>
+                        <span>Dự án Khoa Học Kỹ Thuật Tỉnh Vĩnh Long 2025-2026</span>
                     </div>
-                    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight">Ứng Dụng AI Phân Loại Rác Thải & Bảo Tàng Số Hóa EnviroVision</h1>
+                    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight">Ứng Dụng AI Phân Loại Rác Thải, Bản Đồ 3D CO2 & Bảo Tàng Số EnviroVision</h1>
                     <p class="text-mint-100 text-base md:text-lg leading-relaxed font-normal">
-                        Giải pháp ứng dụng mô hình học sâu trí tuệ nhân tạo **EfficientNetV2-B0** kết hợp nền tảng bảo tàng số tương tác 3D giúp số hóa thông tin, tính toán giảm thiểu CO2 và tự động hóa phân loại rác thải tại nguồn.
+                        Hệ thống kết hợp mô hình AI EfficientNetV2-B0, mô phỏng bản đồ 3D chuyển dịch CO2 tại tỉnh Vĩnh Long và Game giáo dục sinh thái tương tác dành cho học sinh.
                     </p>
                     <div class="pt-4 flex flex-wrap gap-4">
-                        <button onclick="switchTab('explore')" class="px-7 py-3.5 rounded-2xl bg-white text-mint-800 text-sm font-extrabold hover:bg-mint-50 transition-all shadow-xl flex items-center gap-2">
-                            <span>Khám phá báo cáo chi tiết</span>
-                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        <button onclick="switchTab('co2-map3d')" class="px-7 py-3.5 rounded-2xl bg-white text-mint-800 text-sm font-extrabold hover:bg-mint-50 transition-all shadow-xl flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            <span>Xem Bản Đồ 3D Vĩnh Long</span>
                         </button>
-                        <button onclick="switchTab('ai-scanner')" class="px-7 py-3.5 rounded-2xl bg-mint-700/80 hover:bg-mint-700 text-white border border-white/20 text-sm font-extrabold transition-all flex items-center gap-2">
-                            <i data-lucide="scan" class="w-5 h-5"></i>
-                            <span>Thử máy quét AI</span>
+                        <button onclick="switchTab('eco-game')" class="px-7 py-3.5 rounded-2xl bg-mint-700/80 hover:bg-mint-700 text-white border border-white/20 text-sm font-extrabold transition-all flex items-center gap-2">
+                            <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+                            <span>Chơi Game Môi Trường</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Thống kê chỉ số KHKT -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-sm flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
-                        <i data-lucide="target" class="w-8 h-8"></i>
-                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0"><i data-lucide="target" class="w-8 h-8"></i></div>
                     <div>
                         <div class="text-3xl font-extrabold text-mint-800">94.88%</div>
-                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Độ chính xác Test Set</div>
+                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Độ chính xác AI</div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-sm flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
-                        <i data-lucide="zap" class="w-8 h-8"></i>
-                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0"><i data-lucide="map" class="w-8 h-8"></i></div>
                     <div>
-                        <div class="text-3xl font-extrabold text-mint-800">0.11 Giây</div>
-                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Thời gian nhận diện / Ảnh</div>
+                        <div class="text-3xl font-extrabold text-mint-800">Bản Đồ 3D</div>
+                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">AI Heatmap Vĩnh Long</div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-sm flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
-                        <i data-lucide="layers" class="w-8 h-8"></i>
-                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0"><i data-lucide="trending-up" class="w-8 h-8"></i></div>
                     <div>
-                        <div class="text-3xl font-extrabold text-mint-800">22 Nhãn</div>
-                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Phân loại rác chi tiết</div>
+                        <div class="text-3xl font-extrabold text-mint-800">Cơ Cấu CO2</div>
+                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Dự báo 2025 - 2035</div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-sm flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0">
-                        <i data-lucide="database" class="w-8 h-8"></i>
-                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center shrink-0"><i data-lucide="gamepad-2" class="w-8 h-8"></i></div>
                     <div>
-                        <div class="text-3xl font-extrabold text-mint-800">192.000+</div>
-                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Dữ liệu huấn luyện</div>
+                        <div class="text-3xl font-extrabold text-mint-800">Eco-Game</div>
+                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Giáo dục trẻ em</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 2: KHÁM PHÁ ĐỀ TÀI (NỘI DUNG PDF BÁO CÁO) -->
+        <!-- TAB 2: KHÁM PHÁ ĐỀ TÀI -->
         <section id="tab-explore" class="tab-content hidden space-y-8 animate-fadeIn">
             <div class="text-center max-w-3xl mx-auto space-y-3">
                 <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Nghiên Cứu Khoa Học</span>
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-mint-800">Báo Cáo Nghiên Cứu KHKT Chi Tiết</h2>
-                <p class="text-sm text-slate-600 leading-relaxed">Trích xuất minh chứng từ báo cáo KHKT Lĩnh vực Kỹ thuật Môi trường năm học 2025 - 2026</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Thực trạng & Tính cấp thiết -->
                 <div class="bg-white p-8 rounded-3xl border border-mint-100 shadow-sm space-y-5">
-                    <div class="flex items-center gap-3 text-mint-700 border-b border-mint-100 pb-4">
-                        <div class="p-3 rounded-2xl bg-mint-100">
-                            <i data-lucide="alert-triangle" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-serif font-bold text-xl">1. Thực Trạng & Tính Cấp Thiết</h3>
-                    </div>
-                    <ul class="text-sm text-slate-600 space-y-3 leading-relaxed list-disc list-inside">
-                        <li><strong>Tỷ lệ tái chế thấp:</strong> Tỷ lệ tái chế chất thải sinh hoạt tại Việt Nam hiện chỉ đạt khoảng **10%** (VnEconomy, 2025), phần lớn bị chôn lấp gây ô nhiễm nguồn nước và đất.</li>
-                        <li><strong>Khó khăn phân loại:</strong> Việc xả rác lẫn lộn giữa rác hữu cơ, rác vô cơ, rác điện tử làm giảm khả năng tái chế và tăng chi phí xử lý.</li>
-                        <li><strong>Rủi ro công nhân:</strong> Phân loại thủ công tốn nhiều nhân lực và tiềm ẩn nguy cơ lây nhiễm độc hại cho công nhân vệ sinh.</li>
-                        <li><strong>Giải pháp EnviroVision:</strong> Sử dụng AI phân loại tự động kết hợp Bảo tàng số giáo dục cộng đồng giúp giải quyết triệt để bài toán phân loại tại nguồn.</li>
-                    </ul>
+                    <h3 class="font-serif font-bold text-xl text-mint-800">1. Thực Trạng & Tính Cấp Thiết Tại Vĩnh Long</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Chỉ 10% rác thải được tái chế[cite: 4]. Việc thiếu công cụ dự báo phát thải CO2 theo vùng khiến công tác quản lý môi trường tại các khu công nghiệp và đô thị tỉnh Vĩnh Long gặp khó khăn.
+                    </p>
                 </div>
-
-                <!-- Tiêu chí giải pháp -->
                 <div class="bg-white p-8 rounded-3xl border border-mint-100 shadow-sm space-y-5">
-                    <div class="flex items-center gap-3 text-mint-700 border-b border-mint-100 pb-4">
-                        <div class="p-3 rounded-2xl bg-mint-100">
-                            <i data-lucide="check-circle" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-serif font-bold text-xl">2. Tiêu Chí Giải Pháp KHKT</h3>
-                    </div>
-                    <div class="space-y-4 text-sm">
-                        <div class="p-4 rounded-2xl bg-mint-50/60 border border-mint-100">
-                            <span class="font-bold text-mint-800 block text-base mb-1">Độ chính xác vượt trội (&gt;85%):</span>
-                            <span class="text-slate-600">Thực tế mô hình đạt độ chính xác **94.88%** trên tập kiểm thử độc lập 19.231 ảnh thuộc 22 nhóm rác.</span>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-mint-50/60 border border-mint-100">
-                            <span class="font-bold text-mint-800 block text-base mb-1">Thời gian suy luận thời gian thực:</span>
-                            <span class="text-slate-600">Thời gian nhận diện trung bình **0.11 giây/ảnh**, đáp ứng tốt cho tích hợp camera và thùng rác thông minh.</span>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-mint-50/60 border border-mint-100">
-                            <span class="font-bold text-mint-800 block text-base mb-1">Giao diện thân thiện & Mở rộng:</span>
-                            <span class="text-slate-600">Dễ dàng triển khai trên trình duyệt web, mở rộng dữ liệu huấn luyện mà không cần thay đổi kiến trúc nền.</span>
-                        </div>
-                    </div>
+                    <h3 class="font-serif font-bold text-xl text-mint-800">2. Mô Hình AI EfficientNetV2-B0 & Machine Learning</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Mô hình AI nhận diện 22 loại rác đạt độ chính xác **94.88%**[cite: 10] kết hợp thuật toán phân tích chuỗi thời gian dự báo xu hướng CO2 toàn tỉnh Vĩnh Long.
+                    </p>
                 </div>
             </div>
+        </section>
 
-            <!-- Phương pháp AI & Data Augmentation -->
-            <div class="bg-white p-8 rounded-3xl border border-mint-100 shadow-sm space-y-6">
-                <div class="flex items-center gap-3 text-mint-700 border-b border-mint-100 pb-4">
-                    <div class="p-3 rounded-2xl bg-mint-100">
-                        <i data-lucide="cpu" class="w-6 h-6"></i>
+        <!-- TAB 3: BẢN ĐỒ 3D AI HEATMAP CO2 VĨNH LONG -->
+        <section id="tab-co2-map3d" class="tab-content hidden space-y-8 animate-fadeIn">
+            <div class="text-center max-w-3xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Mô Phỏng Không Gian 3D</span>
+                <h2 class="font-serif text-3xl font-bold text-mint-800">Bản Đồ 3D AI Heatmap CO2 Tỉnh Vĩnh Long</h2>
+                <p class="text-sm text-slate-500">Machine Learning phân tích mật độ rác & phát thải CO2: Vùng màu Đỏ/Cam đậm thể hiện nồng độ CO2 cao</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <!-- Khung 3D Canvas Map -->
+                <div class="lg:col-span-2 bg-slate-900 rounded-3xl overflow-hidden h-[420px] relative border border-slate-800 shadow-2xl">
+                    <div id="map-3d-container" class="w-full h-full"></div>
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md p-3 rounded-2xl border border-slate-700 text-white text-xs space-y-1">
+                        <div class="font-bold text-mint-400">Chú thích AI Highlight:</div>
+                        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-600 block"></span><span>Đỏ đậm: CO2 Rất Cao (&gt;85%)</span></div>
+                        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500 block"></span><span>Cam: CO2 Trung Bình</span></div>
+                        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500 block"></span><span>Xanh: CO2 Thấp (An toàn)</span></div>
                     </div>
-                    <h3 class="font-serif font-bold text-xl">3. Phương Pháp Nghiên Cứu AI EfficientNetV2-B0</h3>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm text-slate-600 leading-relaxed">
-                    <div class="space-y-3">
-                        <h4 class="font-bold text-mint-800 text-base">Kiến trúc mô hình:</h4>
-                        <p>Nhóm nghiên cứu chọn **EfficientNetV2-B0** (Google Research) sử dụng các khối Fused-MBConv giúp tối ưu thời gian huấn luyện và giữ kích thước mô hình gọn nhẹ, phù hợp cho triển khai trên nền tảng web.</p>
-                        <h4 class="font-bold text-mint-800 text-base">Chiến lược 7 giai đoạn Data Augmentation:</h4>
-                        <p>Áp dụng xoay ảnh, cắt xén, biến dạng phối cảnh, làm mờ, thay đổi độ sáng và CutMix giúp mô hình nhận diện chính xác vật thể rác trong điều kiện thực tế nhiều nhiễu.</p>
+
+                <!-- Bảng chi tiết từng khu vực Vĩnh Long -->
+                <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-lg space-y-4">
+                    <h3 class="font-serif font-bold text-lg text-mint-800">Chi Tiết Khu Vực Vĩnh Long</h3>
+                    <div class="space-y-3 text-xs">
+                        <button onclick="selectRegion('TP. Vĩnh Long', 'Rất Cao', 'Chế biến thủy sản, đô thị hóa', 'Đỏ Đậm', 88)" class="w-full p-3 rounded-2xl bg-red-50 text-left border border-red-200 hover:bg-red-100 transition-all">
+                            <div class="font-bold text-red-800">TP. Vĩnh Long</div>
+                            <div class="text-slate-600">Nồng độ CO2: <strong>88% (Rất cao - Red Zone)</strong></div>
+                        </button>
+                        <button onclick="selectRegion('TX. Bình Minh', 'Cao', 'Cụm công nghiệp, giao thông', 'Cam Đậm', 76)" class="w-full p-3 rounded-2xl bg-amber-50 text-left border border-amber-200 hover:bg-amber-100 transition-all">
+                            <div class="font-bold text-amber-800">TX. Bình Minh</div>
+                            <div class="text-slate-600">Nồng độ CO2: <strong>76% (Cao - Orange Zone)</strong></div>
+                        </button>
+                        <button onclick="selectRegion('Huyện Long Hồ', 'Trung Bằng', 'Làng nghề gốm sứ Mang Thít/Long Hồ', 'Cam', 62)" class="w-full p-3 rounded-2xl bg-amber-50/60 text-left border border-amber-100 hover:bg-amber-100 transition-all">
+                            <div class="font-bold text-amber-800">Huyện Long Hồ & Mang Thít</div>
+                            <div class="text-slate-600">Nồng độ CO2: <strong>62% (Trung bình)</strong></div>
+                        </button>
+                        <button onclick="selectRegion('Huyện Trà Ôn / Vũng Liêm', 'Thấp', 'Nông nghiệp sinh thái cây ăn trái', 'Xanh Lá', 28)" class="w-full p-3 rounded-2xl bg-emerald-50 text-left border border-emerald-200 hover:bg-emerald-100 transition-all">
+                            <div class="font-bold text-emerald-800">Trà Ôn & Vũng Liêm</div>
+                            <div class="text-slate-600">Nồng độ CO2: <strong>28% (Thấp - Vùng Xanh)</strong></div>
+                        </button>
                     </div>
-                    <div class="bg-mint-50 p-6 rounded-2xl border border-mint-100 space-y-3">
-                        <h4 class="font-bold text-mint-800 text-base">Thông số kiểm thử thực nghiệm (Test Metrics):</h4>
-                        <div class="grid grid-cols-2 gap-3 text-xs font-bold text-mint-800 text-center">
-                            <div class="p-3 rounded-xl bg-white shadow-sm">Macro Precision: 0.95</div>
-                            <div class="p-3 rounded-xl bg-white shadow-sm">Macro Recall: 0.95</div>
-                            <div class="p-3 rounded-xl bg-white shadow-sm">Macro F1-Score: 0.95</div>
-                            <div class="p-3 rounded-xl bg-white shadow-sm">Validation Loss: 0.1607</div>
-                        </div>
+
+                    <div id="region-detail-box" class="p-4 rounded-2xl bg-mint-50 border border-mint-200 text-xs space-y-1">
+                        <strong id="selected-region-name" class="font-bold text-mint-800 block text-sm">TP. Vĩnh Long</strong>
+                        <p id="selected-region-desc" class="text-slate-600">Mật độ khí thải tập trung cao nhất tại các tuyến giao thông chính và khu vực chế biến.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 3: THƯ VIỆN 22 LOẠI RÁC SỐ HÓA CHI TIẾT -->
-        <section id="tab-library" class="tab-content hidden space-y-6 animate-fadeIn">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-mint-100 pb-4">
-                <div>
-                    <h2 class="font-serif text-3xl font-bold text-mint-800">Thư Viện Số Hóa 22 Loại Rác Thải</h2>
-                    <p class="text-sm text-slate-500 mt-1">Click vào từng loại rác để xem thời gian phân hủy, chất độc hại và hướng dẫn xử lý</p>
-                </div>
-                <!-- Bộ lọc -->
-                <div class="flex gap-2 overflow-x-auto pb-2">
-                    <button onclick="filterTrash('all')" class="filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-mint-600 text-white">Tất cả (22)</button>
-                    <button onclick="filterTrash('recyclable')" class="filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-mint-700 border border-mint-200">Tái chế</button>
-                    <button onclick="filterTrash('organic')" class="filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-mint-700 border border-mint-200">Hữu cơ</button>
-                    <button onclick="filterTrash('hazardous')" class="filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-mint-700 border border-mint-200">Nguy hại / Điện tử</button>
-                </div>
+        <!-- TAB 4: CHUYỂN DỊCH CƠ CẤU CO2 TƯƠNG LAI & GỢI Ý XANH -->
+        <section id="tab-co2-trend" class="tab-content hidden space-y-8 animate-fadeIn">
+            <div class="text-center max-w-3xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Dự Báo Tương Lai</span>
+                <h2 class="font-serif text-3xl font-bold text-mint-800">Dự Báo Chuyển Dịch Cơ Cấu CO2 Tỉnh Vĩnh Long</h2>
+                <p class="text-sm text-slate-500">Mô phỏng nơi sẽ tăng/giảm phát thải CO2 trong tương lai kèm giải pháp thích ứng</p>
             </div>
 
-            <!-- Grid 22 loại rác -->
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-6">
+                <!-- Chọn mốc thời gian tương lai -->
+                <div class="space-y-3">
+                    <label class="block text-xs font-bold text-slate-700 uppercase">Chọn kịch bản thời gian dự báo:</label>
+                    <div class="grid grid-cols-4 gap-3 text-center">
+                        <button onclick="updateCO2Scenario(2025)" id="btn-year-2025" class="year-btn py-3 rounded-2xl text-xs font-bold bg-mint-600 text-white shadow-md">Năm 2025</button>
+                        <button onclick="updateCO2Scenario(2028)" id="btn-year-2028" class="year-btn py-3 rounded-2xl text-xs font-bold bg-mint-50 text-mint-800 border border-mint-200">Năm 2028</button>
+                        <button onclick="updateCO2Scenario(2030)" id="btn-year-2030" class="year-btn py-3 rounded-2xl text-xs font-bold bg-mint-50 text-mint-800 border border-mint-200">Năm 2030</button>
+                        <button onclick="updateCO2Scenario(2035)" id="btn-year-2035" class="year-btn py-3 rounded-2xl text-xs font-bold bg-mint-50 text-mint-800 border border-mint-200">Năm 2035</button>
+                    </div>
+                </div>
+
+                <!-- Thanh dự báo CO2 chuyển dịch -->
+                <div class="p-6 rounded-2xl bg-mint-50/60 border border-mint-200 space-y-4">
+                    <div class="flex justify-between text-xs font-bold text-mint-800">
+                        <span>Chỉ số phát thải dự báo toàn tỉnh:</span>
+                        <span id="scenario-emission-val" class="text-red-600 text-sm">1.250.000 Tấn CO2e / Năm</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-4 rounded-full overflow-hidden">
+                        <div id="scenario-bar" class="bg-gradient-to-r from-emerald-500 via-amber-500 to-red-600 h-full transition-all duration-500" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <!-- Danh sách khu vực tăng / giảm & Gợi ý xanh -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 rounded-2xl bg-red-50/80 border border-red-200 space-y-3">
+                        <div class="flex items-center gap-2 text-red-700 font-bold text-sm">
+                            <i data-lucide="trending-up" class="w-5 h-5"></i>
+                            <span>Vùng có nguy cơ tăng CO2 cao hơn:</span>
+                        </div>
+                        <ul id="scenario-increase-list" class="text-xs text-slate-700 space-y-2 list-disc list-inside">
+                            <li>Cụm công nghiệp Cổ Chiên & Bình Minh (Do mở rộng sản xuất).</li>
+                            <li>Tuyến quốc lộ 1A & Cầu Mỹ Thuận (Lưu lượng giao thông tăng).</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200 space-y-3">
+                        <div class="flex items-center gap-2 text-emerald-700 font-bold text-sm">
+                            <i data-lucide="trending-down" class="w-5 h-5"></i>
+                            <span>Vùng có xu hướng giảm CO2 (Nhờ ứng dụng AI):</span>
+                        </div>
+                        <ul id="scenario-decrease-list" class="text-xs text-slate-700 space-y-2 list-disc list-inside">
+                            <li>Khu dân cư TP. Vĩnh Long (Tăng cường phân loại rác tại nguồn).</li>
+                            <li>Vùng nông nghiệp sinh thái Trà Ôn (Ủ phân hữu cơ vi sinh).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Gợi ý hành động thực tế -->
+                <div class="p-5 rounded-2xl bg-white border border-mint-200 space-y-3 shadow-sm">
+                    <h4 class="font-bold text-mint-800 text-sm flex items-center gap-2">
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-mint-600"></i>
+                        <span>Gợi ý chiến lược hành động xanh Vĩnh Long:</span>
+                    </h4>
+                    <p id="scenario-recommendation" class="text-xs text-slate-600 leading-relaxed">
+                        Triển khai lắp đặt thùng rác phân loại thông minh tích hợp AI tại các trường học trên địa bàn TP. Vĩnh Long; Khuyến khích làng nghề gốm sứ chuyển đổi sang công nghệ nung điện/khí sinh học tiết kiệm nhiên liệu.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: GAME GIÁO DỤC MÔI TRƯỜNG DÀNH CHO TRẺ EM -->
+        <section id="tab-eco-game" class="tab-content hidden space-y-8 animate-fadeIn">
+            <div class="text-center max-w-3xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Gamification Giáo Dục</span>
+                <h2 class="font-serif text-3xl font-bold text-mint-800">Game: Biệt Đội Xanh Enviro-Defender</h2>
+                <p class="text-sm text-slate-500">Trò chơi tương tác giúp trẻ em hiểu rõ tác hại rác thải và cách giảm khí thải CO2!</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-6 text-center">
+                <!-- Điểm số & Danh hiệu -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-mint-50 border border-mint-200">
+                    <div>
+                        <span class="text-xs text-slate-500 uppercase font-bold block">Điểm Eco-Points:</span>
+                        <span id="game-score" class="text-3xl font-extrabold text-mint-700">0</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 uppercase font-bold block">Danh hiệu:</span>
+                        <span id="game-badge" class="text-sm font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">🌱 Dũng Sĩ Tập Sự</span>
+                    </div>
+                </div>
+
+                <!-- Khung câu hỏi Game -->
+                <div class="space-y-4 p-6 rounded-2xl border border-mint-200 bg-mint-50/30">
+                    <div id="game-item-card" class="text-center space-y-2">
+                        <div class="w-16 h-16 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center mx-auto text-2xl font-bold">
+                            🔋
+                        </div>
+                        <h4 id="game-item-title" class="font-serif font-bold text-xl text-mint-800">Cục Pin Cũ Hỏng</h4>
+                        <p id="game-item-desc" class="text-xs text-slate-500">Loại rác này nên bỏ vào thùng rác nào để bảo vệ đất khỏi độc hại?</p>
+                    </div>
+
+                    <!-- Lựa chọn thùng rác -->
+                    <div class="grid grid-cols-3 gap-3 pt-4">
+                        <button onclick="playGameAnswer('recyclable')" class="p-3 rounded-2xl bg-blue-50 text-blue-700 font-bold text-xs hover:bg-blue-100 border border-blue-200">Thùng Tái Chế ♻️</button>
+                        <button onclick="playGameAnswer('organic')" class="p-3 rounded-2xl bg-green-50 text-green-700 font-bold text-xs hover:bg-green-100 border border-green-200">Thùng Hữu Cơ 🍎</button>
+                        <button onclick="playGameAnswer('hazardous')" class="p-3 rounded-2xl bg-red-50 text-red-700 font-bold text-xs hover:bg-red-100 border border-red-200">Rác Nguy Hại ⚠️</button>
+                    </div>
+                </div>
+
+                <!-- Thông báo phản hồi -->
+                <div id="game-feedback" class="hidden p-4 rounded-2xl text-xs font-bold"></div>
+            </div>
+        </section>
+
+        <!-- TAB 6: THƯ VIỆN 3D -->
+        <section id="tab-library" class="tab-content hidden space-y-6 animate-fadeIn">
+            <div class="flex justify-between items-center border-b border-mint-100 pb-4">
+                <h2 class="font-serif text-3xl font-bold text-mint-800">Thư Viện Số Hóa 22 Loại Rác</h2>
+            </div>
             <div id="trash-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
         </section>
 
-        <!-- TAB 4: MÁY QUÉT AI NÂNG CAO -->
+        <!-- TAB 7: QUÉT AI -->
         <section id="tab-ai-scanner" class="tab-content hidden space-y-6 animate-fadeIn">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Công Nghệ AI</span>
-                <h2 class="font-serif text-3xl font-bold text-mint-800">Máy Quét Phân Loại Rác AI Live Scanner</h2>
-                <p class="text-sm text-slate-500">Tải ảnh rác thải lên để AI EfficientNetV2-B0 phân loại tự động</p>
-            </div>
-
-            <div class="max-w-xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-6">
-                <div class="border-2 border-dashed border-mint-200 rounded-3xl p-8 text-center space-y-4 hover:border-mint-500 transition-all bg-mint-50/40">
-                    <div class="w-16 h-16 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center mx-auto">
-                        <i data-lucide="upload-cloud" class="w-8 h-8"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm font-bold text-mint-800">Chọn hoặc tải ảnh rác thải cần nhận diện</p>
-                        <p class="text-xs text-slate-400 mt-1">Hỗ trợ các định dạng JPG, PNG, WEBP</p>
-                    </div>
+            <div class="max-w-xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-6 text-center">
+                <h2 class="font-serif text-3xl font-bold text-mint-800">Máy Quét Phân Loại Rác AI</h2>
+                <div class="border-2 border-dashed border-mint-200 rounded-3xl p-8 bg-mint-50/40">
                     <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-                    <button onclick="document.getElementById('image-input').click()" class="px-6 py-3 rounded-2xl bg-mint-600 text-white text-xs font-bold hover:bg-mint-700 transition-all shadow-md">
-                        Tải ảnh từ máy tính
-                    </button>
+                    <button onclick="document.getElementById('image-input').click()" class="px-6 py-3 rounded-2xl bg-mint-600 text-white text-xs font-bold shadow-md">Tải ảnh rác thải lên</button>
                 </div>
-
-                <div id="scan-result" class="hidden space-y-4 p-5 rounded-2xl bg-mint-50 border border-mint-200">
-                    <div class="flex items-center gap-4">
-                        <img id="preview-img" class="w-24 h-24 object-cover rounded-2xl border border-mint-200" src="" alt="Preview">
-                        <div class="space-y-1">
-                            <span class="text-xs font-bold text-mint-600 uppercase tracking-widest">Dự đoán AI:</span>
-                            <h4 id="result-label" class="font-serif text-xl font-bold text-mint-800">Chai nhựa PET</h4>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-slate-600">Độ tin cậy:</span>
-                                <span id="result-confidence" class="text-xs font-bold text-mint-700">98.5%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-mint-100 text-xs text-slate-600 space-y-2">
-                        <span class="font-bold text-mint-800 block text-sm">Hướng dẫn xử lý đúng quy trình:</span>
-                        <p id="result-guide" class="leading-relaxed">Cho vào thùng rác TÁI CHẾ. Hãy súc sạch và đè dẹp chai trước khi bỏ vào thùng.</p>
-                    </div>
+                <div id="scan-result" class="hidden p-5 rounded-2xl bg-mint-50 text-left space-y-2">
+                    <img id="preview-img" class="w-24 h-24 object-cover rounded-2xl" src="" alt="Preview">
+                    <h4 id="result-label" class="font-serif text-xl font-bold text-mint-800">Kết quả dự đoán</h4>
+                    <p id="result-guide" class="text-xs text-slate-600">Hướng dẫn xử lý...</p>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 5: CÔNG CỤ PHÂN TÍCH GIẢM THIỂU CO2 -->
-        <section id="tab-co2-calc" class="tab-content hidden space-y-8 animate-fadeIn">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Tính Toán Môi Trường</span>
-                <h2 class="font-serif text-3xl font-bold text-mint-800">Công Cụ Phân Tích Giảm Thiểu CO2</h2>
-                <p class="text-sm text-slate-500">Tính toán số lượng khí thải CO2 tiết kiệm được khi tái chế rác thải đúng cách</p>
-            </div>
-
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-2">Chọn loại rác thải tái chế:</label>
-                        <select id="co2-type" class="w-full px-4 py-3 rounded-2xl border border-mint-200 text-sm focus:outline-none focus:border-mint-600 bg-white">
-                            <option value="1.8">Chai nhựa PET / Nhựa các loại</option>
-                            <option value="1.5">Giấy & Bìa Carton</option>
-                            <option value="9.0">Lon nhôm & Kim loại</option>
-                            <option value="0.3">Thủy tinh các loại</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-2">Khối lượng rác phân loại (kg):</label>
-                        <input type="number" id="co2-weight" value="5" min="1" class="w-full px-4 py-3 rounded-2xl border border-mint-200 text-sm focus:outline-none focus:border-mint-600">
-                    </div>
-                </div>
-
-                <button onclick="calculateCO2()" class="w-full py-3.5 rounded-2xl bg-mint-600 text-white font-bold text-sm hover:bg-mint-700 transition-all shadow-md flex items-center justify-center gap-2">
-                    <i data-lucide="calculator" class="w-5 h-5"></i>
-                    <span>Tính Toán Khí CO2 Tái Chế</span>
-                </button>
-
-                <!-- Kết quả CO2 -->
-                <div id="co2-result-box" class="p-6 rounded-2xl bg-mint-50 border border-mint-200 space-y-4">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Khí CO2 giảm thiểu được:</span>
-                        <span id="co2-saved" class="text-2xl font-extrabold text-mint-700">9.0 kg CO2e</span>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-mint-200 pt-3">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Tương đương trồng mới:</span>
-                        <span id="trees-saved" class="text-lg font-bold text-mint-800">0.4 Cây xanh / năm</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 6: BẢN ĐỒ THỰC ĐỊA -->
-        <section id="tab-map" class="tab-content hidden space-y-6 animate-fadeIn">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-xs font-bold uppercase tracking-widest text-mint-600 bg-mint-100 px-4 py-1.5 rounded-full">Ứng Dụng Thực Tế</span>
-                <h2 class="font-serif text-3xl font-bold text-mint-800">Bản Đồ Điểm Thu Gom Rác Nguy Hại</h2>
-                <p class="text-sm text-slate-500">Tìm kiếm trạm thu gom pin cũ, rác thải điện tử và điểm đổi quà xanh</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-3xl border border-mint-100 shadow-sm space-y-4">
-                <div class="w-full h-80 bg-mint-100 rounded-2xl flex flex-col items-center justify-center text-mint-700 relative overflow-hidden border border-mint-200">
-                    <i data-lucide="map-pin" class="w-12 h-12 text-mint-600 animate-bounce mb-2"></i>
-                    <span class="bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-2xl text-xs font-bold text-mint-800 shadow-md">
-                        Mô phỏng 12 trạm thu gom pin & rác điện tử tại địa phương
-                    </span>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 7: TRANG QUẢN TRỊ -->
+        <!-- TAB 8: TRANG QUẢN TRỊ -->
         <section id="tab-admin" class="tab-content hidden space-y-6 animate-fadeIn">
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-6">
-                <div class="flex items-center gap-3 text-mint-800 border-b border-mint-100 pb-4">
-                    <i data-lucide="shield-check" class="w-7 h-7 text-mint-600"></i>
-                    <h2 class="font-serif text-2xl font-bold">Trang Quản Trị Bảo Tàng Số EnviroVision</h2>
-                </div>
-                <div class="space-y-4 text-xs">
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Cập nhật nội dung minh chứng KHKT:</label>
-                        <textarea rows="3" placeholder="Nhập ghi chú minh chứng cho Ban Giám Khảo..." class="w-full px-4 py-3 rounded-2xl border border-mint-200 focus:outline-none focus:border-mint-600 text-sm"></textarea>
-                    </div>
-                    <button class="w-full py-3.5 rounded-2xl bg-mint-600 text-white font-bold text-sm hover:bg-mint-700 transition-all shadow-md">
-                        Lưu Dữ Liệu
-                    </button>
-                </div>
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-mint-100 shadow-xl space-y-4">
+                <h2 class="font-serif text-2xl font-bold text-mint-800">Trang Quản Trị Bảo Tàng Số</h2>
+                <textarea rows="3" placeholder="Ghi chú minh chứng KHKT cho Giám khảo..." class="w-full px-4 py-3 rounded-2xl border border-mint-200 text-sm"></textarea>
+                <button class="w-full py-3.5 rounded-2xl bg-mint-600 text-white font-bold text-sm">Lưu Dữ Liệu</button>
             </div>
         </section>
 
     </main>
 
-    <!-- TRỢ LÝ CHATBOT ECO-ASSISTANT (TƯ VẤN VẬT LIỆU THAY THẾ XANH) -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <button onclick="toggleChatbot()" class="w-14 h-14 rounded-full bg-mint-600 hover:bg-mint-700 text-white flex items-center justify-center shadow-2xl transition-all">
-            <i data-lucide="message-square" class="w-7 h-7"></i>
-        </button>
-
-        <div id="chatbot-box" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 bg-white rounded-3xl border border-mint-200 shadow-2xl p-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-mint-100 pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-mint-100 text-mint-600 flex items-center justify-center font-bold text-xs">AI</div>
-                    <div>
-                        <h4 class="font-bold text-mint-800 text-sm">Eco-Assistant Chatbot</h4>
-                        <span class="text-[10px] text-mint-600">Tư vấn vật liệu xanh thay thế</span>
-                    </div>
-                </div>
-                <button onclick="toggleChatbot()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-            </div>
-            
-            <div id="chat-messages" class="h-60 overflow-y-auto custom-scrollbar space-y-3 text-xs pr-1">
-                <div class="bg-mint-50 p-3 rounded-2xl text-slate-700 border border-mint-100">
-                    Xin chào! Tôi có thể tư vấn sản phẩm thân thiện với môi trường để thay thế cho rác nhựa hay đồ dùng một lần. Hãy đặt câu hỏi cho tôi!
-                </div>
-            </div>
-
-            <div class="flex gap-2">
-                <input type="text" id="chat-input" placeholder="Hỏi vật liệu thay thế..." class="flex-grow px-3 py-2 rounded-xl border border-mint-200 text-xs focus:outline-none focus:border-mint-600">
-                <button onclick="sendChatMessage()" class="px-4 py-2 rounded-xl bg-mint-600 text-white font-bold text-xs"><i data-lucide="send" class="w-4 h-4"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL CHI TIẾT KHI CLICK VÀO 1 TRONG 22 LOẠI RÁC -->
-    <div id="trash-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-3xl p-6 space-y-5 border border-mint-100 shadow-2xl">
-            <div class="flex items-center justify-between border-b border-mint-100 pb-3">
-                <h3 id="modal-title" class="font-serif font-bold text-xl text-mint-800">Tên loại rác</h3>
-                <button onclick="closeModal()" class="p-1 rounded-lg text-slate-400 hover:bg-slate-100"><i data-lucide="x" class="w-6 h-6"></i></button>
-            </div>
-            <div class="space-y-3 text-xs leading-relaxed">
-                <div class="p-3 rounded-xl bg-red-50 text-red-700 border border-red-100">
-                    <strong>Thời gian phân hủy tự nhiên:</strong> <span id="modal-decom">450 năm</span>
-                </div>
-                <div class="p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-100">
-                    <strong>Chất độc hại giải phóng:</strong> <span id="modal-toxin">Vi nhựa, BPA, Phthalates...</span>
-                </div>
-                <div class="p-3 rounded-xl bg-mint-50 text-mint-800 border border-mint-100">
-                    <strong>Quy trình xử lý chuẩn:</strong> <span id="modal-process">Súc sạch, đè dẹp và bỏ vào thùng RÁC TÁI CHẾ.</span>
-                </div>
-            </div>
-            <button onclick="closeModal()" class="w-full py-3 rounded-2xl bg-mint-600 text-white font-bold text-xs">Đóng Bảng Thông Tin</button>
-        </div>
-    </div>
-
     <!-- FOOTER -->
-    <footer class="bg-mint-800 text-white pt-10 pb-8 border-t border-mint-700 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="space-y-3">
-                    <span class="font-serif font-bold text-xl block">Bảo Tàng Số EnviroVision</span>
-                    <p class="text-xs text-mint-200 leading-relaxed">Dự án KHKT Lĩnh vực Kỹ thuật Môi trường năm học 2025 - 2026. Tự động hóa phân loại rác thải ứng dụng AI EfficientNetV2-B0.</p>
-                </div>
-                <div class="space-y-2 text-xs">
-                    <h4 class="font-bold text-mint-200 uppercase tracking-wider">Danh Mục</h4>
-                    <p><a href="#" onclick="switchTab('overview')">Tổng quan dự án</a></p>
-                    <p><a href="#" onclick="switchTab('library')">Thư viện 22 loại rác số hóa</a></p>
-                </div>
-                <div class="space-y-2 text-xs">
-                    <h4 class="font-bold text-mint-200 uppercase tracking-wider">Đơn vị</h4>
-                    <p>Cuộc thi KHKT Cấp Tỉnh Dành Cho Học Sinh Trung Học</p>
-                </div>
-            </div>
-            <div class="pt-6 border-t border-mint-700/60 text-center text-xs text-mint-300">
-                © 2025-2026 EnviroVision Digital Museum.
-            </div>
-        </div>
+    <footer class="bg-mint-800 text-white py-8 border-t border-mint-700 text-center text-xs text-mint-300">
+        © 2025-2026 Bảo Tàng Số EnviroVision - Dự Án KHKT Tỉnh Vĩnh Long.
     </footer>
 
-    <!-- JAVASCRIPT HỆ THỐNG -->
+    <!-- JAVASCRIPT XỬ LÝ THREE.JS MAP 3D & GAME -->
     <script>
         lucide.createIcons();
 
-        // Data 22 loại rác đầy đủ chi tiết
+        // Data 22 loại rác
         const trashData = [
-            { id: 1, name: "Chai nhựa PET", category: "recyclable", decom: "450 năm", toxin: "Vi nhựa (Microplastics), Antimony, Phthalates", process: "Rửa sạch, ép bẹp và bỏ vào thùng TÁI CHẾ." },
-            { id: 2, name: "Nhựa HDPE (Can/Hộp)", category: "recyclable", decom: "100 - 500 năm", toxin: "Các chất ổn định nhiệt, vi nhựa", process: "Rửa sạch nhãn chai, bỏ thùng TÁI CHẾ nhựa cứng." },
-            { name: "Nhựa LDPE (Túi nilon)", category: "recyclable", decom: "100 - 500 năm", toxin: "Chất tạo màu công nghiệp, vi nhựa", process: "Gom khô ráo, cuộn gọn bỏ vào thùng TÁI CHẾ." },
-            { name: "Săm xe / Nhựa PVC", category: "recyclable", decom: "Trên 500 năm", toxin: "Clo, Phthalates, Dioxin khi đốt", process: "Tuyệt đối không đốt, gom gửi trạm tái chế cao su/PVC." },
-            { name: "Bìa Carton", category: "recyclable", decom: "2 - 3 tháng", toxin: "Mực in công nghiệp", process: "Gấp phẳng khô ráo, bỏ thùng TÁI CHẾ giấy." },
-            { name: "Giấy báo / Giấy văn phòng", category: "recyclable", decom: "2 - 6 tuần", toxin: "Mực in hóa học", process: "Giữ khô ráo, bỏ thùng TÁI CHẾ." },
-            { name: "Lon nhôm (Lon nước)", category: "recyclable", decom: "200 - 500 năm", toxin: "Không phân hủy hoàn toàn nếu bị chôn lấp", process: "Đè dẹp lon, bỏ thùng TÁI CHẾ kim loại." },
-            { name: "Chai thủy tinh", category: "recyclable", decom: "4.000 - 1 triệu năm", toxin: "Không độc hại nhưng gây sát thương vỡ", process: "Rửa sạch, thu gom cẩn thận bỏ thùng TÁI CHẾ." },
-            { name: "Pin thải", category: "hazardous", decom: "500 năm", toxin: "Chì (Pb), Thủy ngân (Hg), Cadmium (Cd)", process: "RÁC NGUY HẠI! Gom riêng đưa tới trạm thu gom pin." },
-            { name: "Bàn phím / Chuột máy tính", category: "hazardous", decom: "500 năm", toxin: "BFRs (Chất chống cháy), Kim loại nặng", process: "RÁC ĐIỆN TỬ. Đưa tới các điểm thu gom thiết bị điện tử." },
-            { name: "Điện thoại / Máy tính cũ", category: "hazardous", decom: "Trên 500 năm", toxin: "Chì, Thủy ngân, Asen trong bo mạch", process: "Đưa tới trạm tái chế rác điện tử chuyên dụng." },
-            { name: "Sạc / Dây cáp điện", category: "hazardous", decom: "200 - 500 năm", toxin: "Nhựa PVC bọc ngoài, Đồng/Niken", process: "Gom riêng chuyển xử lý kim loại." },
-            { name: "Thức ăn thừa", category: "organic", decom: "1 - 2 tuần", toxin: "Phát thải khí Mê-tan (CH4) gây hiệu ứng nhà kính nếu chôn lấp", process: "Bỏ thùng RÁC HỮU CƠ dùng ủ phân compost." },
-            { name: "Vỏ rau củ / Trái cây", category: "organic", decom: "2 - 4 tuần", toxin: "Không độc hại", process: "Thùng RÁC HỮU CƠ, ủ làm phân bón cây." },
-            { name: "Quần áo cũ", category: "recyclable", decom: "20 - 200 năm (sợi tổng hợp)", toxin: "Sợi vi nhựa hóa học", process: "Quyên góp tái sử dụng hoặc làm giẻ lau." },
-            { name: "Giày dép cũ", category: "recyclable", decom: "25 - 40 năm", toxin: "Đế cao su tổng hợp, keo dán", process: "Gom riêng cho các điểm thu gom giày cũ." }
+            { name: "Chai nhựa PET", category: "recyclable", decom: "450 năm" },
+            { name: "Nhựa HDPE (Can/Hộp)", category: "recyclable", decom: "500 năm" },
+            { name: "Nhựa LDPE (Túi nilon)", category: "recyclable", decom: "300 năm" },
+            { name: "Pin thải / Pin điện tử", category: "hazardous", decom: "500 năm" },
+            { name: "Bìa Carton", category: "recyclable", decom: "1 năm" },
+            { name: "Giấy báo / Văn phòng", category: "recyclable", decom: "1 năm" },
+            { name: "Lon nhôm (Lon nước)", category: "recyclable", decom: "200 năm" },
+            { name: "Chai thủy tinh", category: "recyclable", decom: "1000 năm" },
+            { name: "Bàn phím / Chuột cũ", category: "hazardous", decom: "500 năm" },
+            { name: "Thức ăn thừa", category: "organic", decom: "1 năm" }
         ];
+
+        // 1. DỰNG BẢN ĐỒ 3D VĨNH LONG BẰNG THREE.JS
+        let mapScene, mapCamera, mapRenderer, mapGroup;
+
+        function init3DMap() {
+            const container = document.getElementById('map-3d-container');
+            if (!container || container.children.length > 0) return;
+
+            mapScene = new THREE.Scene();
+            mapScene.background = new THREE.Color(0x0f172a);
+
+            mapCamera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            mapCamera.position.set(0, -6, 8);
+            mapCamera.lookAt(0, 0, 0);
+
+            mapRenderer = new THREE.WebGLRenderer({ antialias: true });
+            mapRenderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(mapRenderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            mapScene.add(ambientLight);
+
+            mapGroup = new THREE.Group();
+
+            // Mô phỏng địa hình 3D các huyện tỉnh Vĩnh Long
+            const regions = [
+                { name: "TP. Vĩnh Long", x: 0, y: 1, color: 0xdc2626, height: 1.5 }, // Đỏ Đậm
+                { name: "TX. Bình Minh", x: -1.5, y: -0.5, color: 0xf97316, height: 1.2 }, // Cam
+                { name: "Huyện Long Hồ", x: 1.2, y: 0.8, color: 0xf59e0b, height: 1.0 },
+                { name: "Huyện Trà Ôn", x: -0.8, y: -1.8, color: 0x10b981, height: 0.5 }, // Vùng xanh
+                { name: "Huyện Vũng Liêm", x: 1.8, y: -1.2, color: 0x10b981, height: 0.5 }
+            ];
+
+            regions.forEach(r => {
+                const geo = new THREE.BoxGeometry(1.2, 1.2, r.height);
+                const mat = new THREE.MeshStandardMaterial({ color: r.color, roughness: 0.2 });
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(r.x, r.y, r.height / 2);
+                mapGroup.add(mesh);
+            });
+
+            mapScene.add(mapGroup);
+            animateMap();
+        }
+
+        function animateMap() {
+            requestAnimationFrame(animateMap);
+            if (mapGroup) mapGroup.rotation.z += 0.003;
+            if (mapRenderer && mapScene && mapCamera) mapRenderer.render(mapScene, mapCamera);
+        }
+
+        function selectRegion(name, level, cause, highlight, percent) {
+            document.getElementById('selected-region-name').innerText = name;
+            document.getElementById('selected-region-desc').innerText = `Nồng độ CO2: ${percent}% (${level}). Nguyên nhân chính: ${cause}. Highlight AI: Khu vực ${highlight}.`;
+        }
+
+        // 2. CHUYỂN DỊCH CƠ CẤU CO2 TƯƠNG LAI
+        function updateCO2Scenario(year) {
+            document.querySelectorAll('.year-btn').forEach(b => {
+                b.classList.remove('bg-mint-600', 'text-white');
+                b.classList.add('bg-mint-50', 'text-mint-800');
+            });
+            document.getElementById('btn-year-' + year).classList.add('bg-mint-600', 'text-white');
+
+            const valBox = document.getElementById('scenario-emission-val');
+            const bar = document.getElementById('scenario-bar');
+            const rec = document.getElementById('scenario-recommendation');
+
+            if (year === 2025) {
+                valBox.innerText = "1.250.000 Tấn CO2e / Năm";
+                bar.style.width = "75%";
+                rec.innerText = "Triển khai lắp đặt hệ thống AI phân loại rác tại TP. Vĩnh Long và KCN Hòa Phú.";
+            } else if (year === 2028) {
+                valBox.innerText = "1.420.000 Tấn CO2e / Năm";
+                bar.style.width = "85%";
+                rec.innerText = "Cần chuyển đổi công nghệ nung khí sinh học tại làng nghề gốm sứ Mang Thít để cắt giảm khí thải CO2.";
+            } else if (year === 2030) {
+                valBox.innerText = "1.100.000 Tấn CO2e / Năm (Nhờ tái chế xanh)";
+                bar.style.width = "55%";
+                rec.innerText = "Tỷ lệ phân loại rác đạt 60% giúp giảm mạnh lượng rác chôn lấp, các vùng xanh mở rộng tại Trà Ôn và Vũng Liêm.";
+            } else if (year === 2035) {
+                valBox.innerText = "850.000 Tấn CO2e / Năm (Đạt mục tiêu Net-Zero)";
+                bar.style.width = "35%";
+                rec.innerText = "Hoàn thành mô hình Bảo tàng số và thùng rác AI phủ rộng 100% trường học và khu đô thị tỉnh Vĩnh Long.";
+            }
+        }
+
+        // 3. GAME GIÁO DỤC TRẺ EM
+        let gameScore = 0;
+        const gameItems = [
+            { icon: "🔋", title: "Cục Pin Cũ Hỏng", category: "hazardous", desc: "Chứa kim loại nặng chì, thủy ngân độc hại!" },
+            { icon: "🥤", title: "Vỏ Chai Nhựa PET", category: "recyclable", desc: "Có thể tái chế thành hộp nhựa hoặc sợi dệt!" },
+            { icon: "🍌", title: "Vỏ Chuối / Thức Ăn Thừa", category: "organic", desc: "Dễ phân hủy thành phân bón compost cho cây!" }
+        ];
+        let currentGameIdx = 0;
+
+        function playGameAnswer(choice) {
+            const current = gameItems[currentGameIdx];
+            const feedback = document.getElementById('game-feedback');
+            feedback.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+
+            if (choice === current.category) {
+                gameScore += 20;
+                feedback.classList.add('bg-green-100', 'text-green-800');
+                feedback.innerText = "🎉 Chính xác! Bạn nhận được +20 Eco-Points và giúp giảm 0.5kg CO2!";
+            } else {
+                feedback.classList.add('bg-red-100', 'text-red-800');
+                feedback.innerText = "❌ Chưa đúng rồi! Hãy thử lại nhé.";
+            }
+
+            document.getElementById('game-score').innerText = gameScore;
+            
+            // Cập nhật danh hiệu
+            if (gameScore >= 40) document.getElementById('game-badge').innerText = "🏆 Hiệp Sĩ Xanh Vĩnh Long";
+
+            // Chuyển câu tiếp
+            currentGameIdx = (currentGameIdx + 1) % gameItems.length;
+            setTimeout(() => {
+                const nextItem = gameItems[currentGameIdx];
+                document.getElementById('game-item-card').innerHTML = `
+                    <div class="w-16 h-16 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center mx-auto text-2xl font-bold">${nextItem.icon}</div>
+                    <h4 class="font-serif font-bold text-xl text-mint-800">${nextItem.title}</h4>
+                    <p class="text-xs text-slate-500">${nextItem.desc}</p>
+                `;
+            }, 1000);
+        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
 
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-white', 'shadow-sm', 'text-mint-800');
-                btn.classList.add('text-mint-700');
-            });
-
-            const activeNav = document.getElementById('nav-' + tabId);
-            if (activeNav) activeNav.classList.add('bg-white', 'shadow-sm', 'text-mint-800');
+            if (tabId === 'co2-map3d') setTimeout(init3DMap, 100);
         }
 
         function renderTrash(items) {
             document.getElementById('trash-grid').innerHTML = items.map(item => `
-                <div onclick="openModal('${item.name}')" class="bg-white p-5 rounded-3xl border border-mint-100 shadow-sm space-y-3 hover:shadow-md hover:border-mint-500 transition-all cursor-pointer">
-                    <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold ${item.category === 'recyclable' ? 'bg-blue-50 text-blue-600' : item.category === 'organic' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'}">
-                            ${item.category === 'recyclable' ? 'Tái chế' : item.category === 'organic' ? 'Hữu cơ' : 'Nguy hại'}
-                        </span>
-                        <i data-lucide="info" class="w-4 h-4 text-mint-500"></i>
-                    </div>
+                <div class="bg-white p-5 rounded-3xl border border-mint-100 shadow-sm space-y-2">
                     <h4 class="font-serif font-bold text-mint-800 text-base">${item.name}</h4>
-                    <p class="text-xs text-slate-500 line-clamp-2">Thời gian phân hủy: <strong>${item.decom}</strong></p>
+                    <p class="text-xs text-slate-500">Phân hủy: <strong>${item.decom}</strong></p>
                 </div>
             `).join('');
-            lucide.createIcons();
-        }
-
-        function filterTrash(cat) {
-            if (cat === 'all') renderTrash(trashData);
-            else renderTrash(trashData.filter(i => i.category === cat));
-        }
-
-        function openModal(name) {
-            const item = trashData.find(i => i.name === name);
-            if (item) {
-                document.getElementById('modal-title').innerText = item.name;
-                document.getElementById('modal-decom').innerText = item.decom;
-                document.getElementById('modal-toxin').innerText = item.toxin;
-                document.getElementById('modal-process').innerText = item.process;
-                document.getElementById('trash-modal').classList.remove('hidden');
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('trash-modal').classList.add('hidden');
-        }
-
-        function calculateCO2() {
-            const factor = parseFloat(document.getElementById('co2-type').value);
-            const weight = parseFloat(document.getElementById('co2-weight').value) || 0;
-            const saved = (factor * weight).toFixed(1);
-            const trees = (saved / 22).toFixed(1);
-            document.getElementById('co2-saved').innerText = saved + " kg CO2e";
-            document.getElementById('trees-saved').innerText = trees + " Cây xanh / năm";
         }
 
         function handleImageUpload(e) {
@@ -538,28 +529,11 @@
                 reader.onload = function(event) {
                     document.getElementById('preview-img').src = event.target.result;
                     document.getElementById('scan-result').classList.remove('hidden');
+                    document.getElementById('result-label').innerText = "Pin thải / Rác nguy hại";
+                    document.getElementById('result-guide').innerText = "RÁC NGUY HẠI. Tuyệt đối không vứt chung rác sinh hoạt, gom riêng đưa tới trạm thu gom pin!";
                 }
                 reader.readAsDataURL(file);
             }
-        }
-
-        function toggleChatbot() {
-            document.getElementById('chatbot-box').classList.toggle('hidden');
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-            const container = document.getElementById('chat-messages');
-            container.innerHTML += `<div class="bg-mint-600 text-white p-3 rounded-2xl ml-8 text-right">${msg}</div>`;
-            input.value = '';
-            
-            setTimeout(() => {
-                let reply = "Bạn có thể thay thế sản phẩm nhựa bằng các vật liệu xanh như: bình đựng nước Inox/thủy tinh, túi vải Canvas tái sử dụng, hoặc ống hút làm từ tre/cỏ đệm!";
-                container.innerHTML += `<div class="bg-mint-50 p-3 rounded-2xl text-slate-700 border border-mint-100 mr-8">${reply}</div>`;
-                container.scrollTop = container.scrollHeight;
-            }, 600);
         }
 
         window.onload = function() {
